@@ -31,9 +31,8 @@ class Card extends Component {
                 <p>Card Footer</p>
                 </footer>
             </div>
-                )
+            )
     }
 }
-
 
 export default Card;
