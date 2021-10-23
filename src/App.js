@@ -24,6 +24,19 @@ class App extends react.Component {
     ]
   }
 
+  constructor(){
+    super()
+    setTimeout(() => {
+      this.setState({
+        articles : [
+          { id : 4 , title : 'article 4' , body : 'this is article 4' },
+          { id : 5 , title : 'article 5' , body : 'this is article 5' },
+          { id : 6 , title : 'article 6' , body : 'this is article 6' },
+        ]
+      })
+    }, 2000);
+  }
+
   render(){
       return (
         <div className="App">
