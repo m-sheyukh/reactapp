@@ -17,6 +17,11 @@ import React , {Component} from "react";
 // }
 
 class Card extends Component {
+    eventHandler(e) {
+        console.log(this)
+        console.log('click')
+    }
+
     render(){
         let {title , body} = this.props;
         return (
@@ -26,6 +31,7 @@ class Card extends Component {
                 </header>
                 <section className="card-body">
                 <p>{body}</p>
+                <button onClick={this.eventHandler.bind(this , 'xxxxx' )}>Click</button>
                 </section>
                 <footer>
                 <p>Card Footer</p>
