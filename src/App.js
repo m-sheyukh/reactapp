@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React from 'react';  
 import './App.css';
-import Card from './components/Card';
+import CardItem from './components/Card';
+import { Carousel } from 'react-bootstrap';
+//import ErrorBoundary from './components/errors/ErrorBoundary';
 
   // function App() {
   // const [stateArticle , setArticleState] = useState ({
@@ -53,13 +54,7 @@ class App extends React.Component {
     ],
     title : 'this is roocket',
     loading : false,
-    btnStyle : {
-      backgroundColor : 'rgba(0,0,0,.8)',
-      padding : '10px 25px' ,
-      color : 'white' ,
-      border : 'none' ,
-      borderRadius : '3px'
-    }
+    btnHover : false
   }
 
   loadMore = () => {
@@ -82,43 +77,81 @@ class App extends React.Component {
   }
 
 
-
 mouseEnter = (e) => {
-  this.setState(prevState => {
-    return {
-      btnStyle : {
-        ...prevState.btnStyle,
-        backgroundColor : 'rgba(0,0,0,.5)'
-      }
-    }
+  this.setState({
+    btnHover : true
   })
 }
 
 mouseLeave = (e) => {
-  this.setState(prevState => {
-    return {
-      btnStyle : {
-        ...prevState.btnStyle,
-        backgroundColor : 'rgba(0,0,0,.8)'
-      }
-    }
+  this.setState({
+    btnHover : false
   })
 }
   
 
   render() {
 
-    let articleList = this.state.articles.map((article , index) => article.active ? <Card key={index} title={article.title} body={article.body} /> : null )
+    let articleList = this.state.articles.map((article , index) => article.active ? <CardItem key={index} title={article.title} body={article.body} /> : null )
+    let btnclasses = ['btn-more']
 
-      console.log(this.state.btnStyle)
+    if(this.state.btnHover) {
+      btnclasses.push('active')
+    }
+
+    console.log(btnclasses)
 
     return (
       <div className="app">
+
+      <Carousel>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://ahangchin.ir/wp-content/uploads/2020/06/music-lite.jpg"
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://ahangchin.ir/wp-content/uploads/2020/06/music-lite.jpg"
+            alt="Second slide"
+          />
+
+          <Carousel.Caption>
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://ahangchin.ir/wp-content/uploads/2020/06/music-lite.jpg"
+            alt="Third slide"
+          />
+
+          <Carousel.Caption>
+            <h3>Third slide label</h3>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
+
+        <div className="container">
         { articleList }
+        </div>
         {  this.state.loading 
           ? <div>Loading ...</div> : null }
 
-        <button style={ this.state.btnStyle } onClick={this.loadMore}
+        <button
+        //className = {`btn-more ${this.state.btnHover ? 'active' : ''}`}
+        className={btnclasses.join(' ')}
+        onClick={this.loadMore}
         onMouseEnter={this.mouseEnter} 
         onMouseLeave={this.mouseLeave}
 
